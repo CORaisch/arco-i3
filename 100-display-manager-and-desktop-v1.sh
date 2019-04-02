@@ -27,6 +27,7 @@ sudo pacman -S --noconfirm --needed arcolinux-lightdm-gtk-greeter arcolinux-ligh
 sudo pacman -S --noconfirm --needed arcolinux-wallpapers-git 
 #installing desktop environment
 sudo pacman -S --noconfirm --needed i3status
+sudo pacman -S --noconfirm --needed i3lock
 sh AUR-DS/install-i3-gaps-next-*.sh
 #enabling displaymanager or login manager
 sudo systemctl enable lightdm.service -f

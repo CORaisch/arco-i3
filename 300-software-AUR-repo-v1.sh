@@ -32,7 +32,7 @@ sh AUR/install-temps-v*.sh
 
 echo "Installing category Development"
 
-sh AUR/install-sublime-text-v*.sh
+#sh AUR/install-sublime-text-v*.sh
 
 echo "Installing category Education"
 
@@ -45,21 +45,17 @@ echo "Installing category Graphics"
 
 echo "Installing category Internet"
 
-sh AUR/install-vivaldi-and-ffmeg-codecs-v*.sh
-
+#sh AUR/install-vivaldi-and-ffmeg-codecs-v*.sh
 
 echo "Installing category Multimedia"
 
-sh AUR/install-gradio-v*.sh
-sh AUR/install-peek-v*.sh
-sh AUR/install-radiotray-v*.sh
-
+#sh AUR/install-gradio-v*.sh
+#sh AUR/install-peek-v*.sh
+#sh AUR/install-radiotray-v*.sh
 
 echo "Installing category Office"
 
-
 echo "Installing category Other"
-
 
 echo "Installing category System"
 
@@ -77,7 +73,7 @@ sh AUR/install-screenkey-v*.sh
 sh AUR/install-surfn-icons-git-v*.sh
 sh AUR/install-ttf-font-awesome-v*.sh
 sh AUR/install-ttf-mac-fonts-v*.sh
-sh AUR/install-virtualbox-for-linux-v*.sh
+#sh AUR/install-virtualbox-for-linux-v*.sh
 sh AUR/install-xcursor-breeze-v*.sh
 
 # these come always last
