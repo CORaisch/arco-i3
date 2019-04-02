@@ -64,7 +64,7 @@
 *** ln -s ~/.dotfiles/oh-my-zsh/.zshrc ~/.zshrc
 *** ln -s ~/.dotfiles/.bashrc ~/.bashrc
 *** ln -s ~/.dotfiles/spacemacs/.spacemacs ~/.spacemacs
-*** ln -s ~/.dotfiles/i3/config ~/.config/i3/config
+*** ln -s ~/.dotfiles/i3/config ~/.config/i3/config && cp ~/.dotfiles/i3/scripts/set_session_envs.sh ~/.config/i3/scripts/
 *** ln -s ~/.dotfiles/polybar/config ~/.config/polybar/config
 *** ln -s ~/.dotfiles/neofetch/config.conf ~/.config/neofetch/config.conf && cp ~/.dotfiles/neofetch/arch-logo.png ~/.config/neofetch
 *** ln -s ~/.dotfiles/vim/.vimrc ~/.vimrc
