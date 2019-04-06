@@ -75,6 +75,7 @@ sh AUR/install-ttf-font-awesome-v*.sh
 sh AUR/install-ttf-mac-fonts-v*.sh
 #sh AUR/install-virtualbox-for-linux-v*.sh
 sh AUR/install-xcursor-breeze-v*.sh
+sh AUR/install-polybar.sh
 
 # these come always last
 
