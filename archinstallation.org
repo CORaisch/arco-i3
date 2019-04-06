@@ -1,1 +1,86 @@
-/home/claudio/.dotfiles/archinstallation.org
+#+TITLE: Installing Arch Linux with Arcolinux Spices
+#+toc:nil
+
+* 1) Installation of bare Arch Linux
+** 1.1) download Arch Linux image from https://www.archlinux.org/download/ and put on USB
+** 1.2) strictly follow steps in https://wiki.archlinux.org/index.php/Installation_guide and https://arcolinuxd.com/1-how-will-we-proceed-with-the-installation-of-arch-linux/ till installation of Xorg stuff
+** 1.3) /OPTIONAL/ backup-clone partitions with bare installation on extern HDD (do this once per machine)
+* 2) Installation of Video Drivers (if necessary)
+** 2.1) on ThinkPad no additional drivers seem to be necessary
+*** 2.1.1) the required driver should be /xf86-video-intel/ for future purposes
+** 2.2) on main computer the installation was not tested yet, so no further information about drivers
+*** 2.2.1) since the main computer is using a Nvidia video card the proprietary Nvidia drivers should be installed
+* 3) Installation of Desktop/Window Manager and Utils
+** 3.1) install git
+** 3.2) clone repo from arcolinuxd: https://github.com/arcolinuxd/arco-i3 into ~/Apps
+** 3.3) run scripts in ~/Apps/arco-i3/ArchWay to prepare installation from arcolinux repositories
+*** 3.3.1) run ~/Apps/arco-i3/ArchWay/20-trust-key-v4.sh first
+**** 3.3.1.1) if script #20 comes up with an error run ~/Apps/arco-i3/ArchWay/10-add-keyservers-for-key-importing-v4.sh first and then rerun ~/Apps/arco-i3/ArchWay/20-trust-key-v4.sh
+*** 3.3.2) run ~/Apps/arco-i3/ArchWay/30-add-arcolinux-repo-to-pacman-conf-v5.sh and ~/Apps/arco-i3/ArchWay/40-install-software-ArcoLinux-uses-in-bashrc-v1.sh
+*** 3.3.3) /OPTIONAL/ if you want to setup autologin, additionally run ~/Apps/arco-i3/ArchWay/50-create-autologin-group-to-be-able-to-autologin-v1.sh
+** 3.4) run ~/Apps/arco-i3/000-use-all-cores-makepkg-conf-v3.sh, it will optimize installation time during building packages from AUR
+** 3.5) install yay and trizen as AUR helpers
+*** 3.5.1) open /etc/pacman.conf and copy the 3 lines starting with /[arcolinux_repo]/
+*** 3.5.2) rename the the repo name of the copy to /[arcolinux_repo_iso]/
+*** 3.5.3) update pacman repos: # pacman -Syyu
+*** 3.5.4) from the /arcolinux_repo_iso/ you can install yay and trizen: # pacman -S yay trizen
+*** 3.5.5) remove the /arcolinux_repo_iso/ repo afterwards by simply deleting the 3 copied lines from 3.5.2
+** 3.6) now install LightDM and i3 by running ~/Apps/arco-i3/100-display-manager-and-desktop-v1.sh
+*** 3.6.1) add line: sudo pacman -S --noconfirm --needed i3lock
+** 3.7) ~/Apps/arco-i3/110-install-sound-v3.sh, ~/Apps/arco-i3/120-bluetooth-v2.sh, ~/Apps/arco-i3/130-install-printers-v3.sh, ~/Apps/arco-i3/150-install-network-discovery-v4.sh, ~/Apps/arco-i3/160-install-tlp-for-laptops-v1.sh
+*** 3.7.1) /IMPORTANT/ don't install ~/Apps/arco-i3/140-install-samba-v3.sh, since it can conflict with later packages (it's not needed neither)
+** 3.8) run ~/Apps/arco-i3/200-software-arch-linux-repo-v2.sh to install utilities from official Arch repos
+*** 3.8.1) /IMPORTANT/ there are many programmes going to be installed which you probably don't need, so go through the list and comment out those you don't want to use
+*** 3.8.1) uncomment: geany, atom, gimp, inkscape, nomacs, ristretto, firefox, pragha, simplescreenrecorder, evolution
+*** 3.8.2) add line: sudo pacman -S --noconfirm --needed thunderbird archey3 bdf-unifont network-manager-applet emacs
+*** 3.8.3) add line: sudo pacman -S --noconfirm --needed lolcat  :P
+** 3.9) run  ~/Apps/arco-i3/300-software-AUR-repo-v1.sh to install utilities from AUR (takes longest)
+*** 3.9.1) /IMPORTANT/ there are many programmes going to be installed which you probably don't need, so go through the list and comment out those you don't want to use
+*** 3.9.2) uncomment: sublime, vivaldi, gradio, peek, radiotray, virtualbox
+** 3.10) run ~/Apps/arco-i3/400-software-arch-linux-repo-distro-specific-v1.sh and ~/Apps/arco-i3/500-software-AUR-repo-distro-specific-v1.sh without modifications
+** 3.11) run ~/Apps/arco-i3/600-software-from-ArcoLinux-repo-v1.sh to install arcolinux configurations
+*** 3.11.1) /IMPORTANT/ there are many programmes going to be installed which you probably don't need, so go through the list and comment out those you don't want to use
+*** 3.11.2) uncomment: geany-git, discord, dropbox
+** 3.12) run ~/Apps/arco-i3/700-installing-fonts-v2.sh to install some fonts (needs no modifications)
+** 3.13) /OPTIONAL/ run ~/Apps/arco-i3/800-autologin-v3.sh if you wish to setup autologin
+** 3.14) reboot the system and you should boot into LightDM and i3
+* 4) Configuring the new System
+** set keyboard layout permanently
+*** follow instruction from https://wiki.archlinux.org/index.php/Linux_console/Keyboard_configuration @ Persistent Configuration
+** clone .dotfiles from git: git clone https://github.com/CORaisch/dotfiles.git
+** set zsh as default shell: chsh -s /bin/zsh (before check chsh -l if zsh is installed, if not install from Arch repos)
+** install oh-my-zsh as described in https://github.com/robbyrussell/oh-my-zsh
+*** copy my_robbyrussell theme: cp ~/.dotfiles/oh-my-zsh/themes/my_robbyrussell.zsh-theme ~/.oh-my-zsh/themes
+** install zsh-syntax-highlighting for fish-like syntax highlighting: sudo pacman -S zsh-syntax-highlightinghttps://github.com/robbyrussell/oh-my-zsh
+** install vim powerline
+*** sudo pacman -S powerline-vim powerline-fonts
+** install Source-Code-Pro fonts
+*** cp ~/.dotfiles/.fonts/* ~/.fonts/
+*** $ fc-cache
+** install Spacemacs
+*** start emacs once to create the direcory ~/.emacs.d
+*** clone spacemacs repo into ~/.emacs.d: git clone https://github.com/syl20bnr/spacemacs ~/.emacs.d
+*** install cmake-ide by following the steps in: https://github.com/ausimian/spacemacs-cmake-ide
+**** install rtags into Apps
+** install blurlock script as lock screen
+*** copy blurlock script to /usr/bin: sudo ~/.dotfiles/i3/blurlock /usr/bin
+*** make it executable: sudo chmod +x /usr/bin/blurlock
+** create softlinks
+*** ln -s ~/.dotfiles/oh-my-zsh/.zshrc ~/.zshrc
+*** ln -s ~/.dotfiles/.bashrc ~/.bashrc
+*** ln -s ~/.dotfiles/spacemacs/.spacemacs ~/.spacemacs
+*** ln -s ~/.dotfiles/i3/config ~/.config/i3/config && cp ~/.dotfiles/i3/scripts/set_session_envs.sh ~/.config/i3/scripts/
+*** ln -s ~/.dotfiles/polybar/config ~/.config/polybar/config
+*** ln -s ~/.dotfiles/neofetch/config.conf ~/.config/neofetch/config.conf && cp ~/.dotfiles/neofetch/arch-logo.png ~/.config/neofetch
+*** ln -s ~/.dotfiles/vim/.vimrc ~/.vimrc
+*** ln -s ~/.dotfiles/archey3/.archey3.cfg ~/.archey3.cfg
+*** reload i3: mod+shift+R
+** config LightDM (display manager)
+*** copy login wallpapers: sudo cp -r ~/.dotfiles/lightdm/login* /usr/share/backgrounds
+*** copy gtk-greeter config: sudo cp ~/.dotfiles/lightdm/lightdm-gtk-greeter.conf /etc/lightdm
+** install opencv
+*** sudo pacman -S opencv opencv-samples vtk hdf5 glew
+** set .vimrc for root aswell 
+*** $ su -l
+*** # cd /root
+*** # ln -s /home/claudio/.dotfiles/vim/.vimrc .vimrc
