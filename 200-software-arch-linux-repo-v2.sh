@@ -38,6 +38,7 @@ echo "Installing category Development"
 #sudo pacman -S --noconfirm --needed geany
 sudo pacman -S --noconfirm --needed emacs
 sudo pacman -S --noconfirm --needed meld
+sudo pacman -S --noconfirm --needed qalculate-gtk
 #sudo pacman -S --noconfirm --needed
 
 echo "Installing category Education"
